@@ -1,23 +1,15 @@
 
-setwd("~/Desktop/MSBA/Spring/Capstone/capstone-project/Data Analysis/Gender Classifications")
+setwd("~/Desktop/MSBA/Spring/Capstone/capstone-project/Data Analysis")
 
-tfm <- read.csv("TFM_Followers.csv", header = T)
+data <- read.csv("Company_Regression_Data.csv", header = T)
 
-################################
-#### TFM - INDIVIDUAL Level ####
-################################
+####################################
+#### Overall Company Regression ####
+####################################
 
-# Individual empowerment scores of followers ~ Gender + Individual Progressivism Scores of followers
+# Company Empowerment Score ~ Avg. Follower Gender + Avg. Follower Progressivism Score + Avg. Follower Gender * Avg. Follower Progressivism Score + Avg. Follower Empowerment Score
 
-individual_level <- lm(Emp_Score ~ Gender + Prog_Score + Gender * Prog_Score, data = tfm)
+company_reg <- lm(Company_Emp_Score ~ Average_Follower_Gender + Average_Follower_Prog_Score + Average_Follower_Gender * Average_Follower_Prog_Score + Average_Follower_Emp_Score, data = data)
 
-summary(individual_level)
+summary(company_reg)
 
-#########################
-#### Company Level?? ####
-#########################
-
-overall_company_test <- read.csv("TFM_Company_Prediction.csv", header = T)
-
-aov <- aov(Company_Emp_Score ~ Company_Prog_Score + Avg_Follower_Gender + Company_Prog_Score:Avg_Follower_Gender, data = overall_company_test)
-summary(aov)
